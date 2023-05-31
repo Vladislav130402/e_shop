@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Продукт</title>
 </head>
+
+
 <body>
 
 Название товара: {{ product.product_name }}<br>
@@ -11,6 +13,7 @@
 Цена:{{ product.product_price }}<br>
 Категория:{{ product.category_name }}<br>
 Количество:{{ product.product_amount }}<br>
+Фото: <img src="/{{ product.product_images }}">
 <form action="/add_to_cart/{{product.id}}" method="post">
       {% csrf_token %}
       <input type="number" min="1" value="1" name="pr_count">

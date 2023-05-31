@@ -24,6 +24,7 @@ class Products(models.Model):
 class Cart(models.Model):
     user_id = models.IntegerField()
     user_product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    price = models.FloatField(null=True, blank=True)
     user_cart_amount = models.IntegerField()
     cart_added_data = models.DateTimeField(auto_now_add=True)
 

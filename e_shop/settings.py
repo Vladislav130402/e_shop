@@ -118,8 +118,8 @@ USE_TZ = True
 
 import os
 STATIC_URL = 'static/'
-STATIC_ROOT=os.path.join(BASE_DIR, 'assets')
-STATIC_DIRS=[
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 # Default primary key field type
@@ -129,3 +129,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+MIDIA_ROOT = os.path.join(BASE_DIR,'media')

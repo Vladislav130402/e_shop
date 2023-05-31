@@ -8,7 +8,6 @@ urlpatterns = [
     path('add_to_cart/<int:pk>', views.add_products_to_user_cart),
     path('user_cart', views.user_cart),
     path('delete_product/<int:pk>', views.delete_exact_user_cart),
-    # path('order_product',views.order_user_product),
     path('login', views.CustomLoginView.as_view()),
     path('logout',views.LogoutView.as_view()),
 ]

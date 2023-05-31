@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from . models import Category, Products, Cart
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
@@ -55,6 +54,7 @@ def add_products_to_user_cart(request, pk):
           if checker.product_amount >= int(request.POST.get('pr_count')):
                Cart.objects.create(user_id=request.user.id,
                                    user_product=checker,
+                                   price=checker.product_price*int(request.POST.get('pr_count')),
                                    user_cart_amount=int(request.POST.get('pr_count'))).save()
 
                return redirect('/')
@@ -67,12 +67,13 @@ def user_cart(request):
           main_text = 'Новый заказ\n\n'
           for i in cart:
                main_text += f'Товар: {i.user_product}\n'\
-                            f'Кол-во: {i.user_cart_amount}'
-               bot.send_message(142089691, main_text)
-               cart.delete()
-               return redirect('/')
+                            f'Кол-во: {i.user_cart_amount}\n'\
+                            f'Цена: {i.price}\n'\
 
 
+          bot.send_message(142089691, main_text)
+          cart.delete()
+          return redirect('/')
      return render(request, 'user_cart.html', {'cart': cart})
 
 def delete_exact_user_cart(request, pk):
@@ -83,15 +84,3 @@ def delete_exact_user_cart(request, pk):
 
      return redirect('/user_cart')
 
-# def order_user_product(request,models):
-#      user_product= models.Cart.objects.filter(user_id=request.user.id)
-#      full_order_message=f'Новый заказ:\n\n От {request.user}\n'
-#      total_price=0
-#      if user_product:
-#           for product in user_product:
-#                full_order_message +=f'\n{product.user_product}:{product.user_product_amount}шт'
-#                total_price +=int(product.user_product_amount)*float(product.user_product.product_price)
-#      bot.send_message(....)
-#
-#      models.Cart.objects.all().delete()
-#      return redirect('/products')
